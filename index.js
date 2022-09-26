@@ -1,8 +1,10 @@
-let x = [
+let board = [
   ["x", "o", "_"],
   ["x", "o", "_"],
   ["x", "o", "_"],
 ];
+
+let turnsLeft = 9;
 
 // value of player and opponent
 
@@ -46,4 +48,22 @@ function evaluate() {
   }
   // if there is no victory
   return 0;
+}
+
+function miniMax() {
+  let score = evaluate();
+
+  // added base condition
+  if (score == -10 || score == 10) return score;
+
+  // if number of turns becomes 0 
+  if(turnsLeft == 0){
+    return 0
+  }
+  else{
+    turnsLeft--;
+  }
+
+  
+
 }
