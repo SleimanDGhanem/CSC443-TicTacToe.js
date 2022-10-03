@@ -1,22 +1,22 @@
 let board = [
-  ["x", "o", "_"],
-  ["x", "o", "_"],
-  ["x", "o", "_"],
+  ["_", "_", "_"],
+  ["_", "_", "_"],
+  ["_", "_", "_"],
 ];
 
 let turnsLeft = 9;
-// value of player and opponent
+// value of player and bot
 
 let isMax = true;
 
 const player = "x",
-  opponent = "o";
+  bot = "o";
 
 function evaluate() {
   // check if the row is complete
   for (let i = 0; i < x.length; i++) {
     if (x[i][0] == x[i][1] && x[i][1] == x[i][2]) {
-      if ((x[i][0] = player)) {
+      if ((x[i][0] = bot)) {
         return 10;
       } else {
         return -10;
@@ -26,7 +26,7 @@ function evaluate() {
   // check if the column is complete
   for (let i = 0; i < x[i].length; i++) {
     if (x[0][i] == x[1][i] && x[1][i] == x[2][i]) {
-      if ((x[0][i] = player)) {
+      if ((x[0][i] = bot)) {
         return 10;
       } else {
         return -10;
@@ -40,7 +40,7 @@ function evaluate() {
       (x[0][0] == x[1][1] && x[1][1] == x[2][2]) ||
       (x[3][0] == x[1][1] && x[1][1] == x[0][2])
     ) {
-      if ((x[0][0] = player)) {
+      if ((x[0][0] = bot)) {
         return 10;
       } else {
         return -10;
@@ -69,7 +69,7 @@ function miniMax(isMax) {
       for (let j = 0; j < board[i].length; j++) {
         if ((board[i][j] = "_")) {
           // make it AI value
-          board[i][j] = player;
+          board[i][j] = bot;
           // check if this is a good route
           best = Math.max(best, miniMax(!isMax));
           // undo route
@@ -79,7 +79,24 @@ function miniMax(isMax) {
     }
     return best;
   } else {
-    // if it is the player's turn
-    // let player pick a tic tac toe
+    let turnFinished = false;
+    while (turnFinished == false) {
+      console.log(board);
+      let result = window.prompt("enter a value from 1 to 9");
+      let answer = parseInt(result);
+
+      if (answer >= 1 && answer <= 3) {
+        board[0][answer] = player;
+        turnFinished = true;
+      } else if (answer >= 4 && answer <= 6) {
+        board[1][answer] = player;
+        turnFinished = true;
+      } else if (answer >= 6 && answer <= 9) {
+        board[2][answer] = player;
+        turnFinished = true;
+      } else {
+        console.log("do it again you put a wrong number");
+      }
+    }
   }
 }
