@@ -1,13 +1,4 @@
-let board = [
-  ["_", "_", "_"],
-  ["_", "_", "_"],
-  ["_", "_", "_"],
-];
 
-let turnsLeft = 9;
-// value of player and bot
-
-let isMax = true;
 
 const player = "x",
   bot = "o";
@@ -51,16 +42,11 @@ function evaluate() {
   return 0;
 }
 
-function miniMax(board, isMax) {
+function miniMax(board, depth, isMax) {
   let score = evaluate();
 
   // added base condition
   if (score == -10 || score == 10) return score;
-
-  // if number of turns becomes 0
-  if (turnsLeft == 0) {
-    return 0;
-  }
 
   if (isMax) {
     let best = -1000;
@@ -77,6 +63,9 @@ function miniMax(board, isMax) {
           // and choose the maximum value
           best = Math.max(best, minimax(board, !isMax));
 
+          if(depth === 1 && best === 10){
+            return best
+          }
           // Undo the move
           board[i][j] = "_";
         }
@@ -110,21 +99,21 @@ function miniMax(board, isMax) {
   }
 }
 
-function playerTurn() {
+function playerTurn(testboard) {
   let turnFinished = false;
   while (turnFinished == false) {
-    console.log(board);
+    console.log(testboard);
     let result = window.prompt("enter a value from 1 to 9");
     let answer = parseInt(result);
 
     if (answer >= 1 && answer <= 3) {
-      board[0][answer] = player;
+      testboard[0][answer] = player;
       turnFinished = true;
     } else if (answer >= 4 && answer <= 6) {
-      board[1][answer] = player;
+      testboard[1][answer] = player;
       turnFinished = true;
     } else if (answer >= 6 && answer <= 9) {
-      board[2][answer] = player;
+      testboard[2][answer] = player;
       turnFinished = true;
     } else {
       console.log("do it again you put a wrong number");
@@ -138,5 +127,12 @@ function TicTacToe() {
     ["_", "_", "_"],
     ["_", "_", "_"],
   ];
-  for (turnsLeft = 9; turnsleft > 0; turnsLeft--) {}
+  // console.log(board);
+  for (let turnsLeft = 9; turnsLeft > 0; turnsLeft--) {
+    
+    playerTurn(board);
+    turnsLeft--;
+    Minimax(board, 0, true);
+  }
 }
+TicTacToe();
