@@ -1,4 +1,35 @@
-.center{
+.center {
   margin: auto;
-  width: 50%;
+}
+
+.game {
+  width: 45vh;
+  height: 45vh;
+  margin: auto;
+
+  background-image: url("Images/board.png");
+  background-size: 45vh 45vh;
+
+  display: grid;
+  grid-template-columns: 15vh 15vh 15vh;
+  grid-template-rows: 15vh 15vh 15vh;
+  gap: 0;
+}
+
+.red{
+ /* background-image: url("images/red.png");
+  background-repeat: no-repeat;
+  background-size: 12vh 12vh;
+  background-position: center;
+*/
+  animation-duration: 5s;
+  animation-name: smoothsexymoove;
+  
+}
+@keyframes smoothsexymoove{
+  0% {background: red;}
+  25% {background: blue;}
+  50% {background: green;}
+  75%{background: orange;}
+  100%{background: pink;}
 }
